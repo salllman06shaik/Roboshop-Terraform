@@ -8,7 +8,7 @@ resource "aws_instance" "mongodb" {
 }
 
 resource "aws_route53_record" "mongodb" {
-  zone_id = Z04349021DA1RQVNS1OQS
+  zone_id = "Z04349021DA1RQVNS1OQS"
   name    = "mongodb-dev"
   type    = "A"
   ttl     = 10
