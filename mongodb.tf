@@ -18,7 +18,7 @@ resource "aws_route53_record" "mongodb" {
 }
 
 
-resource "null_resource" "frontend" {
+resource "null_resource" "mongodb" {
   provisioner "remote-exec" {
 
     connection {
