@@ -23,7 +23,7 @@ resource "aws_instance" "catalogue" {
 
 
 
-resource "aws_route53_record" "mongodb" {
+resource "aws_route53_record" "catalogue" {
   zone_id = "Z04349021DA1RQVNS1OQS"
   name    = "catalogue-dev"
   type    = "A"
