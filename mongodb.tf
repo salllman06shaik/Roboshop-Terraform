@@ -5,22 +5,23 @@ resource "aws_instance" "mongodb" {
   tags = {
     Name = "mongodb"
   }
-}
+  provisioner "remote-exec" {
 
-provisioner "remote-exec" {
+    connection {
+      type     = "ssh"
+      user     = "ec2-user"
+      password = "DevOps321"
+      host     = self.public_ip
+    }
 
-  connection {
-    type     = "ssh"
-    user     = "ec2-user"
-    password = "DevOps321"
-    host     = self.public_ip
+    inline = [
+      "pip3.11 install ansible",
+      "ansibple-pull -i localhost, -U https://github.com/salllmanshaik/Roboshop-Ansible.git roboshop.yml -e component_name=mongodb -e env=dev",
+    ]
   }
-
-  inline = [
-    "pip3.11 install ansible",
-    "ansibple-pull -i localhost, -U https://github.com/salllmanshaik/Roboshop-Ansible.git roboshop.yml -e component_name=mongodb -e env=dev",
-  ]
 }
+
+
 
 resource "aws_route53_record" "mongodb" {
   zone_id = "Z04349021DA1RQVNS1OQS"
