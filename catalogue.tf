@@ -1,7 +1,7 @@
 resource "aws_instance" "catalogue" {
-  ami           = "ami-09c813fb71547fc4f"
-  instance_type = "t3.small"
-  vpc_security_group_ids = ["sg-0eba58b37f791d36a"]
+  ami           = var.ami_id
+  instance_type = var.instance_type
+  vpc_security_group_ids = var.vpc_security_group_ids
   tags = {
     Name = "catalogue"
   }
