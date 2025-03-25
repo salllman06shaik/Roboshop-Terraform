@@ -25,7 +25,7 @@ resource "aws_instance" "mongodb" {
 
 resource "aws_route53_record" "mongodb" {
   zone_id = "Z04349021DA1RQVNS1OQS"
-  name    = "mongodb-dev"
+  name    = "mongo-dev"
   type    = "A"
   ttl     = 10
   records = [aws_instance.mongodb.private_ip]
