@@ -21,8 +21,8 @@ resource "null_resource" "frontend" {
 
     connection {
       type     = "ssh"
-      user     = data.vault_generic_secret.ssh[username]
-      password = data.vault_generic_secret.ssh[password]
+      user     = data.vault_generic_secret.ssh["username"]
+      password = data.vault_generic_secret.ssh["password"]
       host     = aws_instance.instance.private_ip
     }
 
