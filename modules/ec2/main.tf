@@ -21,8 +21,8 @@ resource "null_resource" "frontend" {
 
     connection {
       type     = "ssh"
-      user     = "ec2-user"
-      password = "DevOps321"
+      user     = data.vault_generic_secret.ssh["usernmae"]
+      password = data.vault_generic_secret.ssh["password"]
       host     = aws_instance.instance.private_ip
     }
 
