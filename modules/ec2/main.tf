@@ -26,6 +26,7 @@ resource "null_resource" "frontend" {
       host     = aws_instance.instance.private_ip
     }
 
+
     inline = [
       "sudo pip3.11 install ansible hvac",
       "ansible-pull -i localhost, -U https://github.com/salllmanshaik/Roboshop-Ansible.git roboshop.yml -e component_name=${var.name} -e env=${var.env} -e vault_token={var.vault_token}",
