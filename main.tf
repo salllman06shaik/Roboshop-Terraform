@@ -7,5 +7,5 @@ module "ec2" {
   name = each.key
   vpc_security_group_ids = var.vpc_security_group_ids
   zone_id = var.zone_id
-
+  vault_token = var.vault_token
 }
