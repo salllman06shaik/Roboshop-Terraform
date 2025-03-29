@@ -17,6 +17,12 @@ resource "aws_route53_record" "record" {
 }
 
 resource "null_resource" "frontend" {
+  depends_on = [aws_route53_record.record]
+
+  triggers = {
+    instance_id_change = aws_instance.instance.id
+  }
+
   provisioner "remote-exec" {
 
     connection {
