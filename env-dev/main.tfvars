@@ -2,6 +2,7 @@ instances = {
   frontend = {
     ami_id = "ami-09c813fb71547fc4f"
     instance_type = "t3.small"
+    ansible_role = "forntend-docker"
   }
   mongodb = {
     ami_id = "ami-09c813fb71547fc4f"
@@ -10,6 +11,7 @@ instances = {
   catalogue = {
     ami_id = "ami-09c813fb71547fc4f"
     instance_type = "t3.small"
+    ansible_role = "catalogue-docker"
   }
   redis = {
     ami_id        = "ami-09c813fb71547fc4f"
@@ -18,18 +20,22 @@ instances = {
   cart = {
     ami_id        = "ami-09c813fb71547fc4f"
     instance_type = "t3.small"
+    ansible_role = "cart-docker"
   }
   payment = {
     ami_id        = "ami-09c813fb71547fc4f"
     instance_type = "t3.small"
+    ansible_role = "payment-docker"
   }
   shipping = {
     ami_id        = "ami-09c813fb71547fc4f"
     instance_type = "t3.small"
+    ansible_role = "shipping-docker"
   }
   dispatch = {
     ami_id        = "ami-09c813fb71547fc4f"
     instance_type = "t3.small"
+    ansible_role = "dispatch-docker"
   }
   rabbitmq = {
     ami_id        = "ami-09c813fb71547fc4f"
@@ -42,6 +48,7 @@ instances = {
   user = {
     ami_id        = "ami-09c813fb71547fc4f"
     instance_type = "t3.small"
+    ansible_role = "user-docker"
   }
 }
 
