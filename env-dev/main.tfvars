@@ -2,7 +2,7 @@ instances = {
   frontend = {
     ami_id = "ami-09c813fb71547fc4f"
     instance_type = "t3.small"
-    ansible_role = "forntend-docker"
+    ansible_role = "frontend-docker"
   }
   mongodb = {
     ami_id = "ami-09c813fb71547fc4f"
