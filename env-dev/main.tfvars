@@ -71,3 +71,11 @@ zone_id = "Z04349021DA1RQVNS1OQS"
 vpc_security_group_ids = ["sg-0eba58b37f791d36a"]
 
 env = "dev"
+
+
+eks = {
+  main = {
+    subnets = ["subnet-0f46cbdb51edf8fff","subnet-0bb0e5e3171a985ae"]
+    eks_version = 1.32
+  }
+}
