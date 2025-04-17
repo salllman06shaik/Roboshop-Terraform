@@ -32,4 +32,4 @@ jobs:
       - name: Terraform Apply
         run: |
           terrafrom init -backend-config=env-dev/state.tfvars
-          terraform apply  -var-file=env-dev/main.tfvars
+          terraform apply  -var-file=env-dev/main.tfvars -auto-approve
