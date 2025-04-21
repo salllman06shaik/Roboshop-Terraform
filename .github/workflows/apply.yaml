@@ -33,7 +33,7 @@ jobs:
            env: 
               vault_token: ${{ secrets.vault_token }}
 
-     Helm-Install Apllications:
+     Helm-Install-Apllications:
        runs-on: self-hosted
        steps:
          - name: Check out repository code
