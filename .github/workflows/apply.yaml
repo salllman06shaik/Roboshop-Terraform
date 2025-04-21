@@ -30,4 +30,17 @@ jobs:
              terraform init -backend-config=env-dev/state.tfvars
              terraform apply -var-file=env-dev/main.tfvars -var vault_token=${vault_token} -auto-approve
            env: 
-              vault_token: ${{ secrets.vault_token }}
+              vault_token:
+
+     Helm-Install Apllications:
+       runs-on: self-hosted
+       steps:
+         - name: Check out repository code
+           uses: actions/checkout@v4
+           with:
+             repository: salllmanshaik/roboshop-helm
+             path: helm
+         - name: Terraform apply
+           run: |
+             cd helm
+             make dev
