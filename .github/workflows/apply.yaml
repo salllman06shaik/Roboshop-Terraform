@@ -1,4 +1,4 @@
-name: Terrafrom init
+name: Terrafrom Apply
 on: workflow_dispatch
 jobs:
 #   Terraform-Init:

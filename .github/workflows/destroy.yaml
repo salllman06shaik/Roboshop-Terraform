@@ -1,4 +1,4 @@
-name: Terrafrom init
+name: Terrafrom Destroy
 on: workflow_dispatch
 jobs:
   Terraform-Destroy:
