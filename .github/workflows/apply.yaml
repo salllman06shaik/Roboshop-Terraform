@@ -25,7 +25,7 @@ jobs:
        steps:
          - name: Check out repository code
            uses: actions/checkout@v4
-         - name: Terraform init
+         - name: Terraform apply
            run: |
              terraform init -backend-config=env-dev/state.tfvars
              terraform apply -var-file=env-dev/main.tfvars -var vault_token=${vault_token} -auto-approve
