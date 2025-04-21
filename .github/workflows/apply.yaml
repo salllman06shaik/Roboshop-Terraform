@@ -1,0 +1,11 @@
+name: Terrafrom init
+on: workflow-dispatch
+jobs:
+   Terraform-Init:
+     runs-on: self-hosted
+     steps:
+       - name: Check out repository code
+         uses: actions/checkout@v4
+       - name: Terraform init
+         run: |
+           terraform init -backend-config=env-dev/state.tfvars
