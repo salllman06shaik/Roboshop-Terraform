@@ -1,5 +1,5 @@
 name: Terrafrom init
-on: workflow-dispatch
+on: workflow_dispatch
 jobs:
    Terraform-Init:
      runs-on: self-hosted
@@ -9,5 +9,3 @@ jobs:
        - name: Terraform init
          run: |
            terraform init -backend-config=env-dev/state.tfvars
-           
-           
