@@ -34,6 +34,8 @@ jobs:
            env: 
               vault_token: ${{ secrets.vault_token }}
 
+
+
 #     Helm-Install-Apllications:
 #       needs: Terraform-Apply
 #       runs-on: self-hosted
@@ -50,140 +52,140 @@ jobs:
 #             make dev
 
 
-Deploy-Cart:
-  needs: Terraform-Apply
-  runs-on: self-hosted
-  steps:
-    - name: Check out repository code
-      uses: actions/checkout@v4
-      with:
-        repository: salllman06shaik/roboshop-cart
-        path: app
-    - name: Check out repository code
-      uses: actions/checkout@v4
-      with:
-        repository: salllmanshaik/roboshop-helm
-        path: helm
-    - name: Helm Install
-      run: |
-        export PATH=/home/github/.local/bin:/home/github/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
-        cd app
-        GID=$(git log --format="%H" -n 1)
-        cd ../helm
-        aws eks update-kubeconfig  --name dev
-        bash argocd.sh cart dev $GID
+     Deploy-Cart:
+       needs: Terraform-Apply
+       runs-on: self-hosted
+       steps:
+         - name: Check out repository code
+           uses: actions/checkout@v4
+           with:
+             repository: salllman06shaik/roboshop-cart
+             path: app
+         - name: Check out repository code
+           uses: actions/checkout@v4
+           with:
+             repository: salllmanshaik/roboshop-helm
+             path: helm
+         - name: Helm Install
+           run: |
+             export PATH=/home/github/.local/bin:/home/github/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
+             cd app
+             GID=$(git log --format="%H" -n 1)
+             cd ../helm
+             aws eks update-kubeconfig  --name dev
+             bash argocd.sh cart dev $GID
 
-  Deploy-Catalogue:
-    needs: Terraform-Apply
-    runs-on: self-hosted
-    steps:
-      - name: Check out repository code
-        uses: actions/checkout@v4
-        with:
-          repository: salllman06shaik/roboshop-catalogue
-          path: app
-      - name: Check out repository code
-        uses: actions/checkout@v4
-        with:
-          repository: salllmanshaik/roboshop-helm
-          path: helm
-      - name: Helm Install
-        run: |
-          export PATH=/home/github/.local/bin:/home/github/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
-          cd app
-          GID=$(git log --format="%H" -n 1)
-          cd ../helm
-          aws eks update-kubeconfig  --name dev
-          bash argocd.sh catalogue dev $GID
+       Deploy-Catalogue:
+         needs: Terraform-Apply
+         runs-on: self-hosted
+         steps:
+           - name: Check out repository code
+             uses: actions/checkout@v4
+             with:
+               repository: salllman06shaik/roboshop-catalogue
+               path: app
+           - name: Check out repository code
+             uses: actions/checkout@v4
+             with:
+               repository: salllmanshaik/roboshop-helm
+               path: helm
+           - name: Helm Install
+             run: |
+               export PATH=/home/github/.local/bin:/home/github/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
+               cd app
+               GID=$(git log --format="%H" -n 1)
+               cd ../helm
+               aws eks update-kubeconfig  --name dev
+               bash argocd.sh catalogue dev $GID
 
-  Deploy-User:
-    needs: Terraform-Apply
-    runs-on: self-hosted
-    steps:
-      - name: Check out repository code
-        uses: actions/checkout@v4
-        with:
-          repository: salllman06shaik/roboshop-user
-          path: app
-      - name: Check out repository code
-        uses: actions/checkout@v4
-        with:
-          repository: salllmanshaik/roboshop-helm
-          path: helm
-      - name: Helm Install
-        run: |
-          export PATH=/home/github/.local/bin:/home/github/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
-          cd app
-          GID=$(git log --format="%H" -n 1)
-          cd ../helm
-          aws eks update-kubeconfig  --name dev
-          bash argocd.sh user dev $GID
+       Deploy-User:
+         needs: Terraform-Apply
+         runs-on: self-hosted
+         steps:
+           - name: Check out repository code
+             uses: actions/checkout@v4
+             with:
+               repository: salllman06shaik/roboshop-user
+               path: app
+           - name: Check out repository code
+             uses: actions/checkout@v4
+             with:
+               repository: salllmanshaik/roboshop-helm
+               path: helm
+           - name: Helm Install
+             run: |
+               export PATH=/home/github/.local/bin:/home/github/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
+               cd app
+               GID=$(git log --format="%H" -n 1)
+               cd ../helm
+               aws eks update-kubeconfig  --name dev
+               bash argocd.sh user dev $GID
 
-  Deploy-Shipping:
-    needs: Terraform-Apply
-    runs-on: self-hosted
-    steps:
-      - name: Check out repository code
-        uses: actions/checkout@v4
-        with:
-          repository: salllman06shaik/roboshop-shipping
-          path: app
-      - name: Check out repository code
-        uses: actions/checkout@v4
-        with:
-          repository: salllmanshaik/roboshop-helm
-          path: helm
-      - name: Helm Install
-        run: |
-          export PATH=/home/github/.local/bin:/home/github/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
-          cd app
-          GID=$(git log --format="%H" -n 1)
-          cd ../helm
-          aws eks update-kubeconfig  --name dev
-          bash argocd.sh shipping dev $GID
+       Deploy-Shipping:
+         needs: Terraform-Apply
+         runs-on: self-hosted
+         steps:
+           - name: Check out repository code
+             uses: actions/checkout@v4
+             with:
+               repository: salllman06shaik/roboshop-shipping
+               path: app
+           - name: Check out repository code
+             uses: actions/checkout@v4
+             with:
+               repository: salllmanshaik/roboshop-helm
+               path: helm
+           - name: Helm Install
+             run: |
+               export PATH=/home/github/.local/bin:/home/github/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
+               cd app
+               GID=$(git log --format="%H" -n 1)
+               cd ../helm
+               aws eks update-kubeconfig  --name dev
+               bash argocd.sh shipping dev $GID
 
-  Deploy-Payment:
-    needs: Terraform-Apply
-    runs-on: self-hosted
-    steps:
-      - name: Check out repository code
-        uses: actions/checkout@v4
-        with:
-          repository: salllman06shaik/roboshop-payment
-          path: app
-      - name: Check out repository code
-        uses: actions/checkout@v4
-        with:
-          repository: salllmanshaik/roboshop-helm
-          path: helm
-      - name: Helm Install
-        run: |
-          export PATH=/home/github/.local/bin:/home/github/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
-          cd app
-          GID=$(git log --format="%H" -n 1)
-          cd ../helm
-          aws eks update-kubeconfig  --name dev
-          bash argocd.sh payment dev $GID
+       Deploy-Payment:
+         needs: Terraform-Apply
+         runs-on: self-hosted
+         steps:
+           - name: Check out repository code
+             uses: actions/checkout@v4
+             with:
+               repository: salllman06shaik/roboshop-payment
+               path: app
+           - name: Check out repository code
+             uses: actions/checkout@v4
+             with:
+               repository: salllmanshaik/roboshop-helm
+               path: helm
+           - name: Helm Install
+             run: |
+               export PATH=/home/github/.local/bin:/home/github/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
+               cd app
+               GID=$(git log --format="%H" -n 1)
+               cd ../helm
+               aws eks update-kubeconfig  --name dev
+               bash argocd.sh payment dev $GID
 
-  Deploy-Frontend:
-    needs: Terraform-Apply
-    runs-on: self-hosted
-    steps:
-      - name: Check out repository code
-        uses: actions/checkout@v4
-        with:
-          repository: salllman06shaik/roboshop-frontend
-          path: app
-      - name: Check out repository code
-        uses: actions/checkout@v4
-        with:
-          repository: salllmanshaik/roboshop-helm
-          path: helm
-      - name: Helm Install
-        run: |
-          export PATH=/home/github/.local/bin:/home/github/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
-          cd app
-          GID=$(git log --format="%H" -n 1)
-          cd ../helm
-          aws eks update-kubeconfig  --name dev
-          bash argocd.sh frontend dev $GID
+       Deploy-Frontend:
+         needs: Terraform-Apply
+         runs-on: self-hosted
+         steps:
+           - name: Check out repository code
+             uses: actions/checkout@v4
+             with:
+               repository: salllman06shaik/roboshop-frontend
+               path: app
+           - name: Check out repository code
+             uses: actions/checkout@v4
+             with:
+               repository: salllmanshaik/roboshop-helm
+               path: helm
+           - name: Helm Install
+             run: |
+               export PATH=/home/github/.local/bin:/home/github/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
+               cd app
+               GID=$(git log --format="%H" -n 1)
+               cd ../helm
+               aws eks update-kubeconfig  --name dev
+               bash argocd.sh frontend dev $GID
