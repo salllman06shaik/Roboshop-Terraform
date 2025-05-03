@@ -7,3 +7,9 @@ provider "vault" {
   address = "http://vault-internal.salman06.shop:8200"
   token = var.vault_token
 }
+
+provider "helm" {
+  kubernetes {
+    config_path = "~/.kube/config"
+  }
+}
