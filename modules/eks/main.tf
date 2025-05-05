@@ -1,3 +1,11 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "5.81.0"
+    }
+  }
+}
 resource "aws_eks_cluster" "main" {
   name = var.env
 
@@ -65,6 +73,12 @@ resource "aws_eks_access_policy_association" "main" {
   }
 }
 
+resource "aws_eks_pod_identity_association" "external-dns" {
+  cluster_name  = aws_eks_cluster.main.name
+  namespace = "default"
+  service_account = "external-dns"
+  role_arn = aws_iam_role.external-dns.arn
+}
 
 
 
