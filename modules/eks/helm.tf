@@ -15,17 +15,20 @@ resource "null_resource" "metrics-server" {
   }
 }
 
-
-
-
-
 resource "helm_release" "kube-prometheus-stack" {
-  depends_on = [null_resource.kubeconfig]
+  depends_on = [null_resource.kubeconfig, helm_release.ingress, helm_release.cert-manager]
   name       = "kube-prom-stack"
   repository = "https://prometheus-community.github.io/helm-charts"
   chart      = "kube-prometheus-stack"
 
+
+  values = [
+    file("${path.module}/helm-config/prom-stack-${var.env}.yml")
+  ]
 }
+
+
+
 
 resource "helm_release" "ingress" {
   depends_on = [null_resource.kubeconfig]

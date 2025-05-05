@@ -1,0 +1,26 @@
+grafana:
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+    hosts:
+      - grafana-dev.salman06.shop
+    path: /
+    tls:
+      - secretName: grafana-general-tls
+        hosts:
+          - grafana-dev.salman06.shop
+
+prometheus:
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+    hosts:
+      - prometheus-dev.salman06.shop
+    tls:
+      - secretName: prometheus-general-tls
+        hosts:
+          - prometheus-dev.salman06.shop
