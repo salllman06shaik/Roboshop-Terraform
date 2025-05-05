@@ -70,3 +70,10 @@ resource "null_resource" "cert-manager-cluster-issuer" {
     command = "kubectl apply -f ${path.module}/helm-config/cluster-issuer.yml"
   }
 }
+
+resource "helm_release" "external-dns" {
+  depends_on = [null_resource.kubeconfig]
+  name       = "cert-manager"
+  repository = "https://kubernetes-sigs.github.io/external-dns/"
+  chart      = "external-dns"
+}
