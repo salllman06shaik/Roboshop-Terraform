@@ -57,10 +57,8 @@ resource "helm_release" "cert-manager" {
   namespace = "cert-manager"
   create_namespace = true
 
-  set =[
-    {
+  set {
       name = "crds.enabled"
       value = "true"
     }
-  ]
 }
