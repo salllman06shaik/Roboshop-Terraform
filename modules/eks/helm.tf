@@ -71,15 +71,16 @@ resource "helm_release" "external-dns" {
   chart      = "external-dns"
 }
 
+
 resource "helm_release" "argocd" {
   depends_on = [null_resource.kubeconfig, helm_release.external-dns, helm_release.ingress, helm_release.cert-manager]
 
-  name = "argocd"
-  repository = "https://argoproj.github.io/argo-helm"
-  chart = "argo-cd"
-  namespace = "argocd"
+  name             = "argocd"
+  repository       = "https://argoproj.github.io/argo-helm"
+  chart            = "argo-cd"
+  namespace        = "argocd"
   create_namespace = true
-  wait = false
+  wait             = false
 
   set {
     name  = "global.domain"
