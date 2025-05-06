@@ -23,7 +23,7 @@ resource "helm_release" "kube-prometheus-stack" {
 
 
   values = [
-    file("${path.module}/helm-config/prom-stack-${var.env}.yml")
+    file("${path.module}/helm-config/prom-stack-${var.env}.yaml")
   ]
 }
 
@@ -37,7 +37,7 @@ resource "helm_release" "ingress" {
   chart      = "ingress-nginx"
 
   values = [
-    file("${path.module}/helm-config/ingress.yml")
+    file("${path.module}/helm-config/ingress.yaml")
   ]
 }
 
@@ -60,13 +60,13 @@ resource "null_resource" "cert-manager-cluster-issuer" {
   depends_on = [null_resource.kubeconfig, helm_release.cert-manager]
 
   provisioner "local-exec" {
-    command = "kubectl apply -f ${path.module}/helm-config/cluster-issuer.yml"
+    command = "kubectl apply -f ${path.module}/helm-config/cluster-issuer.yaml"
   }
 }
 
 resource "helm_release" "external-dns" {
   depends_on = [null_resource.kubeconfig]
-  name       = "cert-manager"
+  name       = "external-dns"
   repository = "https://kubernetes-sigs.github.io/external-dns/"
   chart      = "external-dns"
 }
@@ -88,6 +88,6 @@ resource "helm_release" "argocd" {
   }
 
   values = [
-    file("${path.module}/helm-config/argocd.yml")
+    file("${path.module}/helm-config/argocd.yaml")
   ]
 }

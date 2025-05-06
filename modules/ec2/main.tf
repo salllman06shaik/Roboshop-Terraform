@@ -38,7 +38,7 @@ resource "null_resource" "frontend" {
 
     inline = [
       "sudo pip3.11 install ansible hvac",
-      "ansible-pull -i localhost, -U https://github.com/salllmanshaik/Roboshop-Ansible.git roboshop.yml -e component_name=${var.ansible_role} -e env=${var.env} -e vault_token=${var.vault_token}",
+      "ansible-pull -i localhost, -U https://github.com/salllmanshaik/Roboshop-Ansible.git roboshop.yaml -e component_name=${var.ansible_role} -e env=${var.env} -e vault_token=${var.vault_token}",
     ]
   }
 

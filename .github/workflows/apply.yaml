@@ -74,6 +74,9 @@ jobs:
              cd ../helm
              aws eks update-kubeconfig  --name dev
              bash argocd.sh cart dev $GID
+             
+          
+             
 
      Deploy-Catalogue:
        needs: Terraform-Apply
