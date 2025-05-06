@@ -82,7 +82,7 @@ resource "helm_release" "argocd" {
   wait = false
 
   set {
-    name  = "global-domain"
+    name  = "global.domain"
     value = "argocd-${var.env}.salman06.shop"
   }
 
