@@ -79,3 +79,29 @@ resource "aws_iam_role_policy_attachment" "external-dns-route53-full-access" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonRoute53FullAccess"
   role       = aws_iam_role.external-dns.name
 }
+
+
+
+resource "aws_iam_role" "k8s-prometheus" {
+  name = "${var.env}-eks-prometheus-server-role"
+  assume_role_policy = jsonencode({
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Effect": "Allow",
+        "Principal": {
+          "Service": "pods.eks.amazonaws.com"
+        },
+        "Action": [
+          "sts:AssumeRole",
+          "sts:TagSession"
+        ]
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "k8s-prometheus-readonly-access" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ReadOnlyAccess"
+  role       = aws_iam_role.k8s-prometheus.name
+}
