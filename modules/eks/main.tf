@@ -85,3 +85,10 @@ resource "aws_eks_pod_identity_association" "k8s-kubernetes" {
   role_arn = aws_iam_role.k8s-prometheus.arn
 }
 
+
+resource "aws_eks_pod_identity_association" "cluster-autoscaler" {
+  cluster_name    = aws_eks_cluster.main.name
+  namespace       = "kube-system"
+  service_account = "cluster-autoscaler-aws-cluster-autoscaler"
+  role_arn        = aws_iam_role.cluster-autoscaler.arn
+}
