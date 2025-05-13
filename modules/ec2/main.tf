@@ -20,7 +20,7 @@ resource "aws_route53_record" "record" {
   records = [aws_instance.instance.private_ip]
 }
 
-resource "null_resource" "frontend" {
+resource "null_resource" "instance_dns" {
   depends_on = [aws_route53_record.record]
 
   triggers = {
