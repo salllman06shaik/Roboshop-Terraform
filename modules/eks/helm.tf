@@ -178,7 +178,7 @@ spec:
           key: "token"
 EOK
 EOF
-  }
+}
 }
 
 
