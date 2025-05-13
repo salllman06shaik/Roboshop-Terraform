@@ -15,7 +15,7 @@
 #             - logs_path:
 #                 logs_path: "/var/log/containers/"
 #       output.logstash:
-#         hosts: 'elk-stack-internal.rdevopsb83.online:5044'
+#         hosts: 'elk-stack-internal.salman06.shop:5044'
 #
 #
 
@@ -81,7 +81,7 @@ daemonset:
                 - equals:
                     kubernetes.labels.component: "shipping"
       output.logstash:
-        hosts: 'elk-stack-internal.rdevopsb83.online:5044'
+        hosts: 'elk-stack-internal.salman06.shop:5044'
   # Only used when updateStrategy is set to "RollingUpdate"
   maxUnavailable: 1
   nodeSelector: {}
