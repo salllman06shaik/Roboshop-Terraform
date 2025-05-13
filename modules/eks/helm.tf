@@ -131,3 +131,52 @@ resource "helm_release" "cluster-autoscaler" {
     value = "us-east-1"
   }
 }
+
+
+# External Secrets
+
+resource "helm_release" "external-secrets" {
+
+  depends_on = [null_resource.kubeconfig]
+  name       = "external-secrets"
+  repository = "https://charts.external-secrets.io"
+  chart      = "external-secrets"
+  namespace  = "kube-system"
+  wait       = "false"
+
+  set {
+    name  = "installCRDs"
+    value = true
+  }
+}
+
+resource "null_resource" "external-secret-store" {
+  provisioner "local-exec" {
+    command = <<EOF
+kubectl apply -f - <<EOK
+apiVersion: v1
+kind: Secret
+metadata:
+  name: vault-token
+data:
+  token: aHZzLlZWYkcwdWp5eUR4WFh5Yjc5bVNqTTh1YQ==
+
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ClusterSecretStore
+metadata:
+  name: vault-backend
+spec:
+  provider:
+    vault:
+      server: "http://vault-internal.salman06.shop:8200"
+      path: "roboshop-${var.env}"
+      version: "v2"
+      auth:
+        tokenSecretRef:
+          name: "vault-token"
+          key: "token"
+EOK
+EOF
+  }
+}
