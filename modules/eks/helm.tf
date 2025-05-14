@@ -103,7 +103,7 @@ resource "helm_release" "filebeat" {
   wait       = "false"
 
   values = [
-    file("${path.module}/helm-config/filebeat.yml")
+    file("${path.module}/helm-config/filebeat.yaml")
   ]
 }
 
