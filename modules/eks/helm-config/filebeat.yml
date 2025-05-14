@@ -3,7 +3,7 @@
 #   extraEnvs: []
 #   secretMounts: []
 #   filebeatConfig:
-#     filebeat.yaml: |
+#     filebeat.yml: |
 #       filebeat.inputs:
 #       - type: container
 #         paths:
@@ -44,9 +44,9 @@ daemonset:
   #   readOnly: true
   hostNetworking: false
   # Allows you to add any config files in /usr/share/filebeat
-  # such as filebeat.yaml for daemonset
+  # such as filebeat.yml for daemonset
   filebeatConfig:
-    filebeat.yaml: |
+    filebeat.yml: |
       filebeat.inputs:
       - type: container
         paths:
@@ -130,9 +130,9 @@ deployment:
   # - name: extras
   #   mountPath: /usr/share/extras
   #   readOnly: true
-  # such as filebeat.yaml for deployment
+  # such as filebeat.yml for deployment
   filebeatConfig:
-    filebeat.yaml: |
+    filebeat.yml: |
       filebeat.inputs:
       - type: tcp
         max_message_size: 10MiB
@@ -264,7 +264,7 @@ extraEnvs: []
 extraVolumes: []
 extraVolumeMounts: []
 # Allows you to add any config files in /usr/share/filebeat
-# such as filebeat.yaml for both daemonset and deployment
+# such as filebeat.yml for both daemonset and deployment
 filebeatConfig: {}
 nodeSelector: {}
 podSecurityContext: {}
@@ -274,4 +274,4 @@ tolerations: []
 labels: {}
 
 ## helm repo add elastic https://helm.elastic.co
-## helm install filebeat elastic/filebeat -f filebeat.yaml
+## helm install filebeat elastic/filebeat -f filebeat.yml
