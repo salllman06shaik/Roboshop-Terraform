@@ -154,6 +154,7 @@ resource "null_resource" "external-secret-store" {
   depends_on = [null_resource.kubeconfig, helm_release.external-secrets]
   provisioner "local-exec" {
     command = <<EOF
+kubectl wait --for=condition=ready pod -l app.kubernetes.io/name=external-secrets -n kube-system --timeout=180s
 kubectl apply -f - <<EOK
 apiVersion: v1
 kind: Secret
