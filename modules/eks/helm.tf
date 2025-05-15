@@ -152,7 +152,6 @@ resource "helm_release" "external-secrets" {
 }
 
 resource "null_resource" "external-secret-store" {
-  depends_on = [null_resource.kubeconfig, helm_release.external-secrets, helm_release.cert-manager]
   provisioner "local-exec" {
     command = <<EOF
 kubectl apply -f - <<EOK
@@ -164,7 +163,7 @@ data:
   token: aHZzLlZWYkcwdWp5eUR4WFh5Yjc5bVNqTTh1YQ==
 
 ---
-apiVersion: external-secrets.io/v1
+apiVersion: external-secrets.io/v1beta1
 kind: ClusterSecretStore
 metadata:
   name: vault-backend
