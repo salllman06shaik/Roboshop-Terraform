@@ -149,13 +149,10 @@ resource "helm_release" "external-secrets" {
     value = true
   }
 
-   timeout   = 300
-    wait      = true
-    atomic    = true
 }
 
 resource "null_resource" "external-secret-store" {
-  depends_on = [null_resource.kubeconfig, helm_release.external-secrets]
+  depends_on = [null_resource.kubeconfig, helm_release.external-secrets, helm_release.cert-manager]
   provisioner "local-exec" {
     command = <<EOF
 kubectl apply -f - <<EOK
