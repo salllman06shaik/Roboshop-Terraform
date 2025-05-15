@@ -148,7 +148,6 @@ resource "helm_release" "external-secrets" {
     name  = "installCRDs"
     value = true
   }
-
 }
 
 resource "null_resource" "external-secret-store" {
@@ -161,7 +160,6 @@ metadata:
   name: vault-token
 data:
   token: aHZzLlZWYkcwdWp5eUR4WFh5Yjc5bVNqTTh1YQ==
-
 ---
 apiVersion: external-secrets.io/v1beta1
 kind: ClusterSecretStore
