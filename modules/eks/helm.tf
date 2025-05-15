@@ -154,10 +154,6 @@ resource "null_resource" "external-secret-store" {
   depends_on = [null_resource.kubeconfig, helm_release.external-secrets]
   provisioner "local-exec" {
     command = <<EOF
-until kubectl get crd clustersecretstores.external-secrets.io >/dev/null 2>&1; do
-  echo "Waiting for CRD clustersecretstores.external-secrets.io..."
-  sleep 5
-done
 kubectl apply -f - <<EOK
 apiVersion: v1
 kind: Secret
