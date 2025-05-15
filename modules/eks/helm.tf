@@ -148,6 +148,10 @@ resource "helm_release" "external-secrets" {
     name  = "installCRDs"
     value = true
   }
+
+   timeout   = 300
+    wait      = true
+    atomic    = true
 }
 
 resource "null_resource" "external-secret-store" {
