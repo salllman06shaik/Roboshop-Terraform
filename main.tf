@@ -30,5 +30,6 @@ module "vpc" {
   vpc_cidr = each.value["cidr"]
   name     = each.key
   env      = var.env
+  subnets  = each.value["subnets"]
 
 }
