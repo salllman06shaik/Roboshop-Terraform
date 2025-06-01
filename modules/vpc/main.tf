@@ -24,19 +24,33 @@ resource "aws_vpc_peering_connection" "peer-to-default-vpc" {
 }
 
 resource "aws_route" "in-main" {
-  count                     = aws_vpc.main.default_route_table_id
+  count                     = length(local.all_route_table_ids)
+  route_table_id                     = var.default_vpc["routetable_id"]
   destination_cidr_block    = var.default_vpc["vpc_cidr"]
   vpc_peering_connection_id = aws_vpc_peering_connection.peer-to-default-vpc.id
 }
 
 resource "aws_route" "in-default" {
-  count                     = var.default_vpc["routetable_id"]
+  route_table_id                     = var.default_vpc["routetable_id"]
   destination_cidr_block    = var.vpc_cidr
   vpc_peering_connection_id = aws_vpc_peering_connection.peer-to-default-vpc.id
 }
 
 resource "aws_internet_gateway" "main" {
   vpc_id = aws_vpc.main.id
+  tags = {
+    Name = "${var.env}-${var.name}"
+  }
+}
+
+resource "aws_eip" "ngw" {
+  domain   = "vpc"
+}
+
+resource "aws_nat_gateway" "main" {
+  allocation_id = aws_eip.ngw.id
+  subnet_id     = aws_subnet.main["default"].id
+
   tags = {
     Name = "${var.env}-${var.name}"
   }
