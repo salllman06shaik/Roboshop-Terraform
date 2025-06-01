@@ -12,5 +12,5 @@ variable "vault_token" {}
 
 variable "eks" {}
 
-
+variable "vpc" {}
 
