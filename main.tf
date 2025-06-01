@@ -26,6 +26,8 @@ module "eks" {
 
 module "vpc" {
   for_each = var.vpc
-  vpc_cidr = each.value[" "]
+  source = "./modules/vpc"
+  vpc_cidr = each.value["cidr"]
+  name     = each.key
 
 }
