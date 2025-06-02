@@ -15,3 +15,4 @@ variable "eks" {}
 variable "vpc" {}
 
 variable "default_vpc" {}
+

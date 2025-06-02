@@ -15,3 +15,5 @@ variable "vault_token" {}
 variable "ansible_role" {}
 
 variable "root_volume_size" {}
+
+variable "subnet_ids" {}

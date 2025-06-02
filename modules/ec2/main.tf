@@ -1,7 +1,8 @@
 resource "aws_instance" "instance" {
-  ami           = var.ami_id
-  instance_type = var.instance_type
+  ami                    = var.ami_id
+  instance_type          = var.instance_type
   vpc_security_group_ids = var.vpc_security_group_ids
+  subnet_id              = var.subnet_ids[0]
   root_block_device {
     volume_size = var.root_volume_size
   }
