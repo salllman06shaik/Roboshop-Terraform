@@ -21,3 +21,7 @@ variable "subnet_ids" {}
 variable "vpc_id" {}
 
 variable "bastion_ssh_nodes" {}
+
+variable "app_cidr" {}
+
+variable "port" {}

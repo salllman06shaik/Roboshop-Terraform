@@ -13,6 +13,8 @@ module "ec2" {
   subnet_ids = module.vpc["main"].subnets["db"]
   vpc_id =  module.vpc["main"].vpc["id"]
   bastion_ssh_nodes = var.bastion_ssh_nodes
+  app_cidr    =  each.value["app_cidr"]
+  port      =  each.value["port"]
 }
 
 

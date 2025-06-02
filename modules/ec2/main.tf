@@ -41,6 +41,19 @@ resource "aws_vpc_security_group_ingress_rule" "allow_ssh" {
   }
 }
 
+resource "aws_vpc_security_group_ingress_rule" "allow_db" {
+  for_each          = var.app_cidr
+  description       = each.key
+  security_group_id = aws_security_group.main.id
+  cidr_ipv4         = each.value
+  from_port         = var.port
+  ip_protocol       = "tcp"
+  to_port           = var.port
+  tags = {
+    Name = each.key
+  }
+}
+
 resource "aws_route53_record" "record" {
   zone_id = var.zone_id
   name    = "${var.name}-${var.env}"

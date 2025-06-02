@@ -10,6 +10,11 @@ db_instances = {
     instance_type = "t3.small"
     root_volume_size = 20
     subnet_ref = "db"
+    port        = 27017
+    app_cidr    = {
+      app-subnet-1 = "10.200.4.0/24"
+      app-subnet-2 = "10.200.5.0/24"
+    }
   }
   #catalogue = {
   #  ami_id = "ami-09c813fb71547fc4f"
