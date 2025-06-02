@@ -23,10 +23,10 @@ module "eks" {
   source = "./modules/eks"
   env = var.env
   eks_version = each.value["eks_version"]
-  subnets = each.value["subnets"]
   node_groups = each.value["node_groups"]
   addons      = each.value["addons"]
   access      = each.value["access"]
+  subnet_ids = module.vpc["main"].subnets["app"]
 }
 
 module "vpc" {
