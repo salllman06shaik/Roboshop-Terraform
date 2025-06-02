@@ -54,7 +54,7 @@ resource "aws_vpc_peering_connection" "peer-to-default-vpc" {
 
 resource "aws_route" "in-main" {
   count                     = length(local.all_route_table_ids)
-  route_table_id            = var.default_vpc["routetable_id"]
+  route_table_id            = local.all_route_table_ids[count.index]
   destination_cidr_block    = var.default_vpc["vpc_cidr"]
   vpc_peering_connection_id = aws_vpc_peering_connection.peer-to-default-vpc.id
 }
@@ -78,13 +78,13 @@ resource "aws_nat_gateway" "main" {
   subnet_id     = local.public_subnet_ids[count.index]
 
   tags = {
-    Name = "${var.env}-${var.name}-${count.index+1}"
+    Name = "${var.env}-${var.name}-${count.index + 1}"
   }
 }
 
 resource "aws_route" "ngw" {
-  count                  = length(local.private_route_table_ids)
-  route_table_id         = local.private_route_table_ids[count.index]
-  destination_cidr_block = "0.0.0.0/0"
-  gateway_id             = element(aws_internet_gateway.main.*.id, count.index)
+  count                   = length(local.private_route_table_ids)
+  route_table_id          = local.private_route_table_ids[count.index]
+  destination_cidr_block  = "0.0.0.0/0"
+  nat_gateway_id          = element(aws_nat_gateway.main.*.id, count.index)
 }

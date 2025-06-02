@@ -9,6 +9,7 @@ db_instances = {
     ami_id = "ami-09c813fb71547fc4f"
     instance_type = "t3.small"
     root_volume_size = 20
+    subnet_ref = "db"
   }
   #catalogue = {
   #  ami_id = "ami-09c813fb71547fc4f"
@@ -20,6 +21,7 @@ db_instances = {
     ami_id        = "ami-09c813fb71547fc4f"
     instance_type = "t3.small"
     root_volume_size = 20
+    subnet_ref = "db"
   }
   #cart = {
   #  ami_id        = "ami-09c813fb71547fc4f"
@@ -49,11 +51,13 @@ db_instances = {
     ami_id        = "ami-09c813fb71547fc4f"
     instance_type = "t3.small"
     root_volume_size = 20
+    subnet_ref = "db"
   }
   mysql = {
     ami_id        = "ami-09c813fb71547fc4f"
     instance_type = "t3.small"
     root_volume_size = 20
+    subnet_ref = "db"
   }
   #user = {
   #  ami_id        = "ami-09c813fb71547fc4f"
@@ -112,36 +116,42 @@ vpc = {
         igw = true
         ngw = false
         zone = "us-east-1a"
+        group = "public"
       }
       public-subnet-2 = {
         cidr = "10.200.1.0/24"
         igw = true
         ngw = false
         zone = "us-east-1b"
+        group = "public"
       }
       db-subnet-1 = {
         cidr = "10.200.2.0/24"
         igw = false
         ngw = true
         zone = "us-east-1a"
+        group = "db"
       }
       db-subnet-2 = {
         cidr = "10.200.3.0/24"
         igw = false
         ngw = true
         zone = "us-east-1b"
+        group = "db"
       }
       app-subnet-1 = {
         cidr = "10.200.4.0/24"
         igw = false
         ngw = true
         zone = "us-east-1a"
+        group = "app"
       }
       app-subnet-2 = {
         cidr = "10.200.5.0/24"
         igw = false
         ngw = true
         zone = "us-east-1b"
+        group = "app"
       }
     }
   }

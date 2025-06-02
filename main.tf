@@ -10,6 +10,7 @@ module "ec2" {
   vault_token = var.vault_token
   ansible_role = lookup(each.value, "ansible_role", each.key)
   root_volume_size = each.value["root_volume_size"]
+  subnet_ids = module.vpc
 }
 
 
@@ -33,4 +34,8 @@ module "vpc" {
   subnets  = each.value["subnets"]
   default_vpc = var.default_vpc
 
+}
+
+output "vpc" {
+  value = module.vpc
 }
