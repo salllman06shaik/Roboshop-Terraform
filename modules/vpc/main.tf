@@ -5,6 +5,13 @@ resource "aws_vpc" "main" {
   }
 }
 
+resource "aws_internet_gateway" "main" {
+  vpc_id = aws_vpc.main.id
+  tags = {
+    Name = "${var.env}-${var.name}"
+  }
+}
+
 resource "aws_subnet" "main" {
   for_each   = var.subnets
   vpc_id     = aws_vpc.main.id
@@ -15,6 +22,27 @@ resource "aws_subnet" "main" {
   }
 }
 
+resource "aws_route_table" "main" {
+  for_each = var.subnets
+  vpc_id = aws_vpc.main.id
+
+  tags = {
+    Name = each.key
+  }
+}
+
+resource "aws_route_table_association" "main" {
+  for_each = var.subnets
+  subnet_id      = aws_subnet.main[each.key].id
+  route_table_id = aws_route_table.main[each.key].id
+}
+
+resource "aws_route" "igw" {
+  count                  = length(local.public_route_table_ids)
+  route_table_id         = local.public_route_table_ids[count.index]
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id             = aws_internet_gateway.main.id
+}
 
 resource "aws_vpc_peering_connection" "peer-to-default-vpc" {
   peer_owner_id = data.aws_caller_identity.current.account_id
@@ -36,22 +64,19 @@ resource "aws_route" "in-default" {
   vpc_peering_connection_id = aws_vpc_peering_connection.peer-to-default-vpc.id
 }
 
-resource "aws_internet_gateway" "main" {
-  vpc_id = aws_vpc.main.id
-  tags = {
-    Name = "${var.env}-${var.name}"
-  }
-}
+
 
 resource "aws_eip" "ngw" {
+  count    = length(local.public_subnet_ids)
   domain   = "vpc"
 }
 
 resource "aws_nat_gateway" "main" {
-  allocation_id = aws_eip.ngw.id
-  subnet_id     = aws_subnet.main["default"].id
+  count         = length(local.public_subnet_ids)
+  allocation_id = aws_eip.ngw[count.index].id
+  subnet_id     = local.public_subnet_ids[count.index]
 
   tags = {
-    Name = "${var.env}-${var.name}"
+    Name = "${var.env}-${var.name}-${count.index+1}"
   }
 }

@@ -107,8 +107,41 @@ vpc = {
   main = {
     cidr = "10.200.0.0/16"
     subnets = {
-      default = {
-        cidr = "10.200.0.0/16"
+      public-subnet-1 = {
+        cidr = "10.200.0.0/24"
+        igw = true
+        ngw = false
+        zone = "us-east-1a"
+      }
+      public-subnet-2 = {
+        cidr = "10.200.1.0/24"
+        igw = true
+        ngw = false
+        zone = "us-east-1b"
+      }
+      db-subnet-1 = {
+        cidr = "10.200.2.0/24"
+        igw = false
+        ngw = true
+        zone = "us-east-1a"
+      }
+      db-subnet-2 = {
+        cidr = "10.200.3.0/24"
+        igw = false
+        ngw = true
+        zone = "us-east-1b"
+      }
+      app-subnet-1 = {
+        cidr = "10.200.4.0/24"
+        igw = false
+        ngw = true
+        zone = "us-east-1a"
+      }
+      app-subnet-2 = {
+        cidr = "10.200.5.0/24"
+        igw = false
+        ngw = true
+        zone = "us-east-1b"
       }
     }
   }
