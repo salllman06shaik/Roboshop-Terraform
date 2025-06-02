@@ -163,4 +163,7 @@ default_vpc = {
   routetable_id = "rtb-09a87eb57ec584752"
 }
 
-bastion_ssh_nodes = ["172.31.0.8/32", "172.31.2.71/32"]
+bastion_ssh_nodes = {
+  workstation = "172.31.0.8/32"
+  github_runner = "172.31.2.71/32"
+}
