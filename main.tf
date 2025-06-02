@@ -12,6 +12,7 @@ module "ec2" {
   root_volume_size = each.value["root_volume_size"]
   subnet_ids = module.vpc["main"].subnets["db"]
   vpc_id =  module.vpc["main"].vpc["id"]
+  bastion_ssh_nodes = var.bastion_ssh_nodes
 }
 
 

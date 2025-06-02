@@ -19,3 +19,5 @@ variable "root_volume_size" {}
 variable "subnet_ids" {}
 
 variable "vpc_id" {}
+
+variable "bastion_ssh_nodes" {}

@@ -16,3 +16,4 @@ variable "vpc" {}
 
 variable "default_vpc" {}
 
+variable "bastion_ssh_nodes" {}
