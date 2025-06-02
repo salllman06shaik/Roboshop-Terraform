@@ -81,3 +81,10 @@ resource "aws_nat_gateway" "main" {
     Name = "${var.env}-${var.name}-${count.index+1}"
   }
 }
+
+resource "aws_route" "ngw" {
+  count                  = length(local.private_route_table_ids)
+  route_table_id         = local.private_route_table_ids[count.index]
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id             = element(aws_internet_gateway.main.*.id, count.index)
+}
