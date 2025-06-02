@@ -1,10 +1,4 @@
 db_instances = {
-  #frontend = {
-  #  ami_id = "ami-09c813fb71547fc4f"
-  #  instance_type = "t3.small"
-  #  ansible_role = "frontend-docker"
-  #  root_volume_size = 30
-  #}
   mongodb = {
     ami_id = "ami-09c813fb71547fc4f"
     instance_type = "t3.small"
@@ -16,18 +10,51 @@ db_instances = {
       app-subnet-2 = "10.200.5.0/24"
     }
   }
+  redis = {
+    ami_id        = "ami-09c813fb71547fc4f"
+    instance_type = "t3.small"
+    root_volume_size = 20
+    subnet_ref = "db"
+    port        = 6379
+    app_cidr    = {
+      app-subnet-1 = "10.200.4.0/24"
+      app-subnet-2 = "10.200.5.0/24"
+    }
+  }
+  rabbitmq = {
+    ami_id        = "ami-09c813fb71547fc4f"
+    instance_type = "t3.small"
+    root_volume_size = 20
+    subnet_ref = "db"
+    port        = 5672
+    app_cidr    = {
+      app-subnet-1 = "10.200.4.0/24"
+      app-subnet-2 = "10.200.5.0/24"
+    }
+  }
+  mysql = {
+    ami_id        = "ami-09c813fb71547fc4f"
+    instance_type = "t3.small"
+    root_volume_size = 20
+    subnet_ref = "db"
+    port        = 3306
+    app_cidr    = {
+      app-subnet-1 = "10.200.4.0/24"
+      app-subnet-2 = "10.200.5.0/24"
+    }
+  }
+  #frontend = {
+  #  ami_id = "ami-09c813fb71547fc4f"
+  #  instance_type = "t3.small"
+  #  ansible_role = "frontend-docker"
+  #  root_volume_size = 30
+  #}
   #catalogue = {
   #  ami_id = "ami-09c813fb71547fc4f"
   #  instance_type = "t3.small"
   #  ansible_role = "catalogue-docker"
   #  root_volume_size = 30
   #}
-  redis = {
-    ami_id        = "ami-09c813fb71547fc4f"
-    instance_type = "t3.small"
-    root_volume_size = 20
-    subnet_ref = "db"
-  }
   #cart = {
   #  ami_id        = "ami-09c813fb71547fc4f"
   #  instance_type = "t3.small"
@@ -52,18 +79,6 @@ db_instances = {
   #  ansible_role = "dispatch-docker"
   #  root_volume_size = 30
   #}
-  rabbitmq = {
-    ami_id        = "ami-09c813fb71547fc4f"
-    instance_type = "t3.small"
-    root_volume_size = 20
-    subnet_ref = "db"
-  }
-  mysql = {
-    ami_id        = "ami-09c813fb71547fc4f"
-    instance_type = "t3.small"
-    root_volume_size = 20
-    subnet_ref = "db"
-  }
   #user = {
   #  ami_id        = "ami-09c813fb71547fc4f"
   #  instance_type = "t3.small"
