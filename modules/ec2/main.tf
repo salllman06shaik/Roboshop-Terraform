@@ -5,6 +5,8 @@ resource "aws_instance" "instance" {
   subnet_id              = var.subnet_ids[0]
   root_block_device {
     volume_size = var.root_volume_size
+    encrypted = true
+    kms_key_id = var.kms_arn
   }
   tags = {
     Name = var.name

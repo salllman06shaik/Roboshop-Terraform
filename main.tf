@@ -15,6 +15,7 @@ module "ec2" {
   bastion_ssh_nodes = var.bastion_ssh_nodes
   app_cidr    =  each.value["app_cidr"]
   port      =  each.value["port"]
+  kms_arn = var.kms_arn
 }
 
 

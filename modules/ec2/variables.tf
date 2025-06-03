@@ -25,3 +25,5 @@ variable "bastion_ssh_nodes" {}
 variable "app_cidr" {}
 
 variable "port" {}
+
+variable "kms_arn" {}
